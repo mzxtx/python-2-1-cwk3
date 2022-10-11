@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+
+<script>
+function toggle(i,j) {
+      b=document.getElementById("but_" + i + j);
+      t = b.innerHTML;
+      if (t=="X") {b.innerHTML = "O";
+                   b.setAttribute("style", "color:green; background-color:white");
+                  }
+      if (t=="O") {b.innerHTML = "X";
+                   b.setAttribute("style", "color:white; background-color:black");
+                  }
+}
+
+// Please complete this function
+function press(i,j) {
+	toggle(i,j);
+        if ((i-1)>=0){
+        c=document.getElementById("but_" + (i-1) + j);
+      t = c.innerHTML;
+      if (t=="X") {c.innerHTML = "O";
+                   c.setAttribute("style", "color:green; background-color:white");
+                  }
+      if (t=="O") {c.innerHTML = "X";
+                   c.setAttribute("style", "color:white; background-color:black");
+                  }
+                }
+        if ((j-1)>=0){
+        d=document.getElementById("but_" + i+ (j-1));
+      t = d.innerHTML;
+      if (t=="X") {d.innerHTML = "O";
+                   d.setAttribute("style", "color:green; background-color:white");
+                  }
+      if (t=="O") {d.innerHTML = "X";
+                   d.setAttribute("style", "color:white; background-color:black");
+                  }
+                }
+        if ((i+1)<=5){
+        e=document.getElementById("but_" + (i+1) + j);
+      t = e.innerHTML;
+      if (t=="X") {e.innerHTML = "O";
+                   e.setAttribute("style", "color:green; background-color:white");
+                  }
+      if (t=="O") {e.innerHTML = "X";
+                   e.setAttribute("style", "color:white; background-color:black");
+                  }
+                }
+        if ((j+1)>=0){
+        f=document.getElementById("but_" + i + (j+1));
+      t = f.innerHTML;
+      if (t=="X") {f.innerHTML = "O";
+                   f.setAttribute("style", "color:green; background-color:white");
+                  }
+      if (t=="O") {f.innerHTML = "X";
+                   f.setAttribute("style", "color:white; background-color:black");
+                  }
+                }
+        if(checkAllOff()){
+                checkAllOff();
+        }
+        else{
+                document.getElementById("end").innerHTML=" ";
+        }
+}
+
+// Please complete this function
+function checkAllOff(){ 
+        for(var i=0;i<5; i++){
+                for (var j=0; j<5; j++){
+                    b=document.getElementById("but_"+i+j);
+                    m = b.innerHTML;
+                    if (m == "O"){
+                        return 0;
+                    }
+                }
+        }
+        document.getElementById("end").innerHTML="Congratulations! All lights out!";
+        return 1;
+}
+
+
+// Please complete this function
+function resetGrid(){
+        for (var i = 0; i < 5; i++)
+		for (var j = 0; j < 5; j++)
+		{
+                        b=document.getElementById("but_"+i+j);
+			if(i != 2 || j != 2){
+                                b.style="color:green; background-color:white";
+				b.innerHTML = "O";
+			}else{
+				b.style="color:white; background-color:black";
+				b.innerHTML = "X";
+			}
+		}    
+}
+
+// 
+function generateGrid() {
+        var d = document.getElementById("button-grid");
+        var table = document.createElement("table");
+        d.appendChild(table);
+        for (var i = 0; i < 5; i++) {
+                var row = document.createElement("tr");
+                for (var j = 0; j < 5; j++) {
+                        var cell = document.createElement("td");
+                        cell.innerHTML = "<button type=button id=but_" + i + j +
+                                         " onclick=\"press(" +i + ',' +j + ")\"" + 
+                                         " style=\"color:green; background-color:white\"" +
+                                         ">O</button>" ;
+                        row.appendChild(cell);
+                }
+                table.appendChild(row);
+        }
+        toggle(2,2) // initial state
+}
+
+window.onload = function() {
+        generateGrid();
+};
+
+</script> 
+
+<title>Lights Off Puzzle</title>
+</head> 
+
+<body>
+<h1>5x5 Lights off Puzzle</h1>
+<p>Click on buttons until they all turn black. When a button is pressed, the buttons above, below, left and right of the button pressed are also toggled. </p>
+<div id="button-grid"></div>
+<h2 id="end" style="color:green"></h2>
+<div id="resetbutton">
+<button type="button" id="reset" onclick=resetGrid()>Reset</button>
+</div>
+
+
+</body>
+
+</html>
